@@ -24,6 +24,13 @@ class Article extends ActiveRecordEntity {
     {
         return 'articles';
     }
+
+    public function set_name(string $name){
+        $this::$name = $name;
+    }
+    public function set_text(string $text){
+        $this->$text = $text;
+    }
     
 }
 ?>

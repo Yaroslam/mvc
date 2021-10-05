@@ -3,6 +3,15 @@ namespace services;
 
 class Db{
     private $pdo;
+    private static $instanse;
+
+    public static function get_instanse(): self{
+        if (self::$instanse === null){
+            self::$instanse = new self;
+
+        }
+        return self::$instanse;
+    }
 
     public function __construct(){
         $dbOptions=(require __DIR__.'/../settings.php')['db'];
@@ -14,8 +23,7 @@ class Db{
         );
         $this->pdo->exec('SET NAMES UTF8');
     }
-    public function query
-    (string $sql, $params = [], string $className='stdClass'): ?array
+    public function query(string $sql, $params = [], string $className='stdClass'): ?array
     {
         $sth = $this->pdo->prepare($sql);
         $result = $sth->execute($params);
@@ -24,6 +32,14 @@ class Db{
             return null;
         }
         return $sth->fetchAll(\PDO::FETCH_CLASS, $className);
+    }
+
+
+    public function getLastInsertId(): int{
+
+
+
+        return 1;
     }
 }
 ?>
