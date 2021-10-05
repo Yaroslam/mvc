@@ -2,6 +2,7 @@
 namespace my_project\controllers;
 use my_project\view\View;
 use my_project\models\articles\Article;
+use my_project\models\users\User;
 
 class ArticleController{
     private $view;
@@ -31,6 +32,19 @@ class ArticleController{
         $this->view->renderHtml
         ('articles/view.php', ['article' => $result]);
         
+    }
+
+    public function add(): void{
+        $author = User::getById(1);
+
+        $article = new Article();
+        $article->set_text("text");
+        $article->set_name("name");
+
+
+
+
+
     }
     
 }

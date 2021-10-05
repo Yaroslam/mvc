@@ -7,13 +7,13 @@ class Db{
 
     public static function get_instanse(): self{
         if (self::$instanse === null){
-            self::$instanse = new self;
+            self::$instanse = new self();
 
         }
         return self::$instanse;
     }
 
-    public function __construct(){
+    private function __construct(){
         $dbOptions=(require __DIR__.'/../settings.php')['db'];
         $this->pdo = new \PDO(
             'mysql:host='.$dbOptions['host'].';
@@ -23,6 +23,7 @@ class Db{
         );
         $this->pdo->exec('SET NAMES UTF8');
     }
+
     public function query(string $sql, $params = [], string $className='stdClass'): ?array
     {
         $sth = $this->pdo->prepare($sql);

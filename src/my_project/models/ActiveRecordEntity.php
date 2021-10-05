@@ -84,8 +84,9 @@ abstract class ActiveRecordEntity{
 
         public function delete(): void {
             $sql = 'DELETE FROM '. static::getTableName().' WHERE id = '.$this->id;;
-            $db = Db::get_instanse();;
+            $db = Db::get_instanse();
             $db->query($sql);
+            $this->id = null;
         }
 
         public function save(): void{
@@ -109,6 +110,7 @@ abstract class ActiveRecordEntity{
             }
             return $mapped_properties;
         }
+
 
         abstract protected static function getTableName() :string;
         
